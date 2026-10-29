@@ -17,8 +17,8 @@ Check: the project is named `session-pin`, is installable from its GitHub reposi
 
 ## Tasks
 
-- T1 — S1, S2 — Build the path-independent pin store and cross-home session catalog — route: inline — pending — commit: pending.
-- T2 — S1, S2 — Build the Pi extension adapter and session switcher overlay — route: inline — pending — commit: pending.
+- T1 — S1, S2 — Build the path-independent pin store and cross-home session catalog — route: inline (delegated verification unavailable) — done — commits: `8360ab4`, `04a10b1`.
+- T2 — S1, S2 — Build the Pi extension adapter and session switcher overlay — route: inline — done — commits: `d3574d1`, `eced7d0`, `3053d50`.
 - T3 — S1, S2 — Package, document, and verify the GitHub-installable extension — route: inline — pending — commit: pending.
 - T4 — S1, S2 — Publish the repository, tag the installable release, and verify installation — route: inline — pending — commit: pending.
 
@@ -29,3 +29,5 @@ Check: the project is named `session-pin`, is installable from its GitHub reposi
 - 2026-10-29 — Exploration confirmed that Pi 1.4.0 has no pin/favorite concept and its native `/resume` selector cannot be extended through the public extension API. The standalone package therefore exposes its own session switcher command while keeping storage, discovery, and ordering independent from the adapter so gentle-shell can adopt the same core for issue #2471 phase 2.
 - 2026-10-29 — Architecture assumption: the public repository is `andrikonbeat/session-pin`; the pin identity is the durable session ID rather than a path or editable name; the store lives under the effective Pi/Gentle Shell agent home.
 - 2026-10-29 — Delivery forecast exceeds 400 authored lines, so `auto-chain` is used: each coherent behavior slice is committed separately on `feat/session-pin` with its tests and documentation.
+- 2026-10-29 — T1 verification: RED failed with `ERR_MODULE_NOT_FOUND` for the absent core modules; GREEN passed 6/6 focused tests (`npm --prefix session-pin test`) and the available TypeScript 5.9 toolchain reported no errors. The delegated GREEN check was unavailable because `gentle-ai-worker` failed, so the parent performed the bounded correction and verification inline.
+- 2026-10-29 — T2 verification: RED failed for the absent command/model, overlay, and extension modules; GREEN passed 17/17 focused tests and the TypeScript 5.9 check was clean. Pi's actual extension loader registered exactly one `session-pin` command, confirming the runtime harness contract.
